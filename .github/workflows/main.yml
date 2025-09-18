@@ -32,7 +32,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring_basic:${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring_basic_jenkins:${{ github.run_number }}
 
   deploy:
     name: deploy
@@ -42,10 +42,10 @@ jobs:
       - name: run ssh
         uses: appleboy/ssh-action@v1
         with:
-          host: 175.197.41.119
+          host: 183.109.116.37
           username: test
           password: ${{ secrets.SSH_PASSWORD }}
-          port: 22
+          port: 114
           script: |
             if kubectl get svc spring-svc -n sjb -o wide | grep -q "green"; then
               CURRENT_VER="green"
